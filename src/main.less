@@ -1,0 +1,101 @@
+:root {
+  /* Colors */
+  --main-mute-color: #3F5066;
+  --main-dark-color: #213F66;
+  --main-color: #4A8CE5;
+  --main-mid-color: #396EB3;
+  --main-light-color: #91B7EA;
+
+  --background: #f6f6f6;
+  --text-color: #191919;
+
+  /* Uses */
+
+  font-family: 'Heebo', sans-serif;
+  /* 62.5% of 16px browser font size is 10px */
+  font-size: 62.5%;
+  font-weight: 400;
+
+
+  box-sizing: border-box;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+
+
+  color: var(--text-color);
+  background-color: var(--background);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text-color: #f6f6f6;
+    --background: #1b1b1b;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+p {
+  margin: 0;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  height: 100vh;
+}
+
+#root {
+  height: 100%;
+}
+
+p {
+  font-size: 1.4rem;
+}
+
+button {
+  cursor: pointer;
+}
+
+input,
+button {
+  outline: none;
+}
+
+
+h1 {
+  font-size: 4rem;
+}
+
+h2 {
+  font-size: 2.4rem;
+}
+
+h3 {
+  font-size: 1.6rem;
+}
+
+h4 {
+  font-size: 1.4rem;
+}
+
+@media screen and (min-width: 1024px) {
+  h1 {
+    font-size: 5rem;
+  }
+
+  h2 {
+    font-size: 3rem;
+  }
+
+}
