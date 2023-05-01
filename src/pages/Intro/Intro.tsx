@@ -1,6 +1,9 @@
-import { Match, Switch, createSignal } from "solid-js";
+import { Match, Show, Switch, createSignal } from "solid-js";
+import ArrowIcon from "../../assets/icons/arrow-right.svg";
+import { PrimaryButton } from "../../components/Button/Buttons";
 import "./Intro.less";
-function Intro() {
+
+const Intro = () => {
   const [currentPage, setCurrentPage] = createSignal(1);
 
   return (
@@ -9,14 +12,35 @@ function Intro() {
         <Match when={currentPage() === 1}>
           <FirstIntro />
         </Match>
+        <Match when={currentPage() === 2}>
+          <SecondIntro />
+        </Match>
       </Switch>
+      <div class="intro-page-switcher">
+        <Show when={currentPage() > 1}>
+          <PrimaryButton
+            class="intro-btn intro-btn--reverse"
+            onClick={() => setCurrentPage((p) => p - 1)}
+          >
+            <ArrowIcon />
+          </PrimaryButton>
+        </Show>
+        <Show when={currentPage() < 3}>
+          <PrimaryButton
+            class="intro-btn"
+            onClick={() => setCurrentPage((p) => p + 1)}
+          >
+            <ArrowIcon />
+          </PrimaryButton>
+        </Show>
+      </div>
     </div>
   );
-}
+};
 
 export default Intro;
 
-function FirstIntro() {
+const FirstIntro = () => {
   return (
     <>
       <header class="intro__header">
@@ -33,4 +57,15 @@ function FirstIntro() {
       </p>
     </>
   );
-}
+};
+
+const SecondIntro = () => {
+  return (
+    <>
+      <header class="intro__header">
+        <h2>Please insert your name:</h2>
+      </header>
+      <input />
+    </>
+  );
+};

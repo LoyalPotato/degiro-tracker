@@ -2,11 +2,38 @@
   display: flex;
   flex-flow: column nowrap;
   text-align: center;
-  margin-top: 2rem;
-  height: 100%;
+  margin: auto;
+  max-width: 67.7rem;
+
   justify-content: center;
 
   .intro__header {
     margin-bottom: 2rem;
+  }
+
+  .intro-btn {
+    .arrow-right {
+      height: 2rem;
+      width: 2rem;
+    }
+
+    &--reverse {
+      transform: rotate(-180deg);
+    }
+  }
+
+  .intro-page-switcher {
+    display: flex;
+    flex-flow: row nowrap;
+    margin-top: 2rem;
+    width: 67.7rem;
+
+    .intro-btn {
+      margin-left: auto;
+
+      &--reverse {
+        margin-left: 0;
+      }
+    }
   }
 }
