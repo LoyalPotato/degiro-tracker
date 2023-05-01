@@ -1,9 +1,10 @@
 import { defineConfig } from "vite";
 import solidPlugin from "vite-plugin-solid";
+import solidSvg, { SolidSVGPluginOptions } from "vite-plugin-solid-svg";
 
 // https://vitejs.dev/config/
 export default defineConfig(async () => ({
-  plugins: [solidPlugin()],
+  plugins: [solidPlugin(), solidSvg(svgConfig())],
 
   // Vite options tailored for Tauri development and only applied in `tauri dev` or `tauri build`
   // prevent vite from obscuring rust errors
@@ -25,3 +26,14 @@ export default defineConfig(async () => ({
     sourcemap: !!process.env.TAURI_DEBUG,
   },
 }));
+
+function svgConfig(): SolidSVGPluginOptions {
+  return {
+    compilerOptions: {
+      allow_props_children: false,
+    },
+    svgo: {
+      enabled: false,
+    },
+  };
+}
