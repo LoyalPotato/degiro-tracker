@@ -1,6 +1,7 @@
 import Intro from "../Intro/Intro";
 import "./layout.less";
-function Layout() {
+
+const Layout = () => {
   /* 
   TODO:
   - If the user already has a local config skip Intro
@@ -10,6 +11,6 @@ function Layout() {
       <Intro />
     </main>
   );
-}
+};
 
 export default Layout;
