@@ -9,6 +9,12 @@
   --background: #f6f6f6;
   --text-color: #191919;
 
+  --border-rad: .4rem;
+
+  --btn-color-primary: var(--main-color);
+  --btn-pads-default: .6rem 1rem;
+  --btn-pads-primary: var(--btn-pads-default);
+
   /* Uses */
 
   font-family: 'Heebo', sans-serif;
@@ -36,14 +42,6 @@
   }
 }
 
-h1,
-h2,
-h3,
-h4,
-p {
-  margin: 0;
-}
-
 html {
   height: 100%;
 }
@@ -60,7 +58,7 @@ body {
 }
 
 p {
-  font-size: 1.4rem;
+  font-size: 1.6rem;
 }
 
 button {
@@ -98,4 +96,18 @@ h4 {
     font-size: 3rem;
   }
 
+}
+
+/* Resets */
+
+h1,
+h2,
+h3,
+h4,
+p {
+  margin: 0;
+}
+
+svg {
+  display: block;
 }
