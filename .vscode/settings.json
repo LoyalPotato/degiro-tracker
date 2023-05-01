@@ -1,5 +1,5 @@
 {
   "debug.allowBreakpointsEverywhere": true,
   "editor.formatOnSave": true,
-  "editor.formatOnSaveMode": "modificationsIfAvailable"
+  "editor.formatOnSaveMode": "file"
 }
