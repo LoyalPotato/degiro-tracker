@@ -1,5 +1,8 @@
 {
   "debug.allowBreakpointsEverywhere": true,
   "editor.formatOnSave": true,
-  "editor.formatOnSaveMode": "file"
+  "editor.formatOnSaveMode": "file",
+  "rust-analyzer.linkedProjects": [
+    ".\\src-tauri\\Cargo.toml"
+  ],
 }
