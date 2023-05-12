@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package degiro_tracker.assets;
+import "google/protobuf/timestamp.proto";
+
+// Some are missing and it's col position
+message ImportedRow {
+  google.protobuf.Timestamp date = 2;
+  string hour = 4;
+  string product = 5;
+  string isin = 1;
+  string description = 6;
+  string currency = 10;
+  sint64 value = 8;
+  string value_currency = 9;
+  sint64 balance = 7;
+  string order_id = 3;
+}
+
+message ImportedFile {
+  repeated ImportedRow imported_rows = 1;
+}
+
+message LastImportDate {
+  google.protobuf.Timestamp last_import_date = 1;
+}

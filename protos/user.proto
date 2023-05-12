@@ -1,0 +1,7 @@
+syntax = "proto3";
+
+package degiro_tracker.user;
+
+message User {
+  string name = 10;
+}
