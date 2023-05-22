@@ -1,11 +1,16 @@
-pub mod protos;
+pub mod mods;
 
-use protos::user::User;
+use mods::user::User;
 
 pub fn test() {
     let new_user = User {
         name: String::from("Jeremia"),
     };
 
-    println!("The lib user is named {:?}", new_user.name)
+    println!("--- I created user --- \n {:?}", &new_user.name);
+
+    new_user.save_user_to_config();
+    if let Some(read_config) = new_user.read_user_from_config() {
+        println!("Reading this user {:?}", read_config);
+    }
 }
