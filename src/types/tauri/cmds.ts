@@ -1,4 +1,4 @@
-import { invoke } from "@tauri-apps/api";
 
-export type AllowedTauriCommand = "get_user"
-export type InvokeParams = Parameters<typeof invoke>
+export type AllowedTauriCommand = UserCommands;
+
+type UserCommands = "get_user" | "save_user";
