@@ -1,4 +1,5 @@
 use super::config::{ResourceConfig, UserConfig};
+use serde::ser::SerializeStruct;
 
 include!(concat!(env!("OUT_DIR"), "/degiro_tracker.user.rs"));
 
@@ -7,8 +8,14 @@ impl User {
         Self { name }
     }
 
-    pub fn read_user_from_config(&self) -> Option<User> {
-        UserConfig::get_config()
+    pub fn read_user_from_config() -> Option<User> {
+        match UserConfig::get_config() {
+            Ok(user) => user,
+            Err(e) => {
+                eprintln!("{e}");
+                None
+            }
+        }
     }
 
     pub fn save_user_to_config(&self) {
@@ -38,5 +45,16 @@ impl std::str::FromStr for User {
         }
 
         Ok(User::new(name))
+    }
+}
+
+impl serde::Serialize for User {
+    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        let mut s = serializer.serialize_struct("User", 1)?;
+        s.serialize_field("name", &self.name)?;
+        s.end()
     }
 }
