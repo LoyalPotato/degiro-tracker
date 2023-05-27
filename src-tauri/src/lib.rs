@@ -9,8 +9,11 @@ pub fn test() {
 
     println!("--- I created user --- \n {:?}", &new_user.name);
 
-    new_user.save_user_to_config();
-    if let Some(read_config) = new_user.read_user_from_config() {
-        println!("Reading this user {:?}", read_config);
+    //new_user.save_user_to_config();
+    match User::read_user_from_config() {
+        Some(read_config) => println!("Reading this user {:?}", read_config),
+        None => {
+            println!("No user found");
+        }
     }
 }
