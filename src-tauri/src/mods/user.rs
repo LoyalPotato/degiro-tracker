@@ -8,6 +8,10 @@ impl User {
         Self { name }
     }
 
+    pub fn new_encoded(encoded_user: Vec<u8>) -> Self {
+        User::decode(&encoded_user[..]).expect("Couldn't decode user")
+    }
+
     pub fn read_user_from_config() -> Option<User> {
         match UserConfig::get_config() {
             Ok(user) => user,
