@@ -22,7 +22,7 @@ impl User {
         }
     }
 
-    pub fn save_user_to_config(&self) {
+    pub fn save_user_to_config(&self) -> () {
         match UserConfig::save_config(&self) {
             Ok(()) => (),
             Err(error) => {
