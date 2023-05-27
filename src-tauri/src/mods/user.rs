@@ -1,5 +1,5 @@
 use super::config::{ResourceConfig, UserConfig};
-use serde::ser::SerializeStruct;
+use prost::Message;
 
 include!(concat!(env!("OUT_DIR"), "/degiro_tracker.user.rs"));
 
@@ -30,6 +30,10 @@ impl User {
             }
         }
     }
+
+    pub fn get_encoded_user(user: &User) -> Vec<u8> {
+        user.encode_to_vec()
+    }
 }
 
 impl std::str::FromStr for User {
@@ -49,16 +53,5 @@ impl std::str::FromStr for User {
         }
 
         Ok(User::new(name))
-    }
-}
-
-impl serde::Serialize for User {
-    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        let mut s = serializer.serialize_struct("User", 1)?;
-        s.serialize_field("name", &self.name)?;
-        s.end()
     }
 }
