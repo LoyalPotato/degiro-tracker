@@ -1,6 +1,7 @@
 use std::{
+    error::Error,
     fs::{self, File},
-    io::{Error, ErrorKind, Write},
+    io::{self, ErrorKind, Write},
     path::PathBuf,
 };
 
@@ -11,18 +12,19 @@ use super::user::User;
 pub struct Config {}
 
 pub trait ResourceConfig<T> {
-    fn get_config() -> Option<T>;
+    type Error;
+    fn get_config() -> Result<Option<T>, Self::Error>;
     fn get_config_path() -> Option<PathBuf>;
-    fn save_config(resource: &T) -> Result<(), Error>;
+    fn save_config(resource: &T) -> Result<(), Self::Error>;
 }
 
 impl Config {
-    pub fn create_config_path() -> Result<(), Error> {
+    pub fn create_config_path() -> Result<(), io::Error> {
         if let Some(config_path) = Self::get_config_path() {
             fs::create_dir_all(config_path).expect("Could not create directory");
             return Ok(());
         }
-        Err(Error::new(ErrorKind::NotFound, "Config path not found"))
+        Err(io::Error::new(ErrorKind::NotFound, "Config path not found"))
     }
 
     pub fn get_config_path() -> Option<PathBuf> {
@@ -43,27 +45,31 @@ impl UserConfig {
 }
 
 impl ResourceConfig<User> for UserConfig {
-    fn get_config() -> Option<User> {
+    type Error = Box<dyn Error>;
+
+    fn get_config() -> Result<Option<User>, Self::Error> {
         if let Some(user_config_path) = Self::get_config_path() {
-            let user: User = fs::read_to_string(user_config_path)
-                .expect("Couldn't read user")
-                .parse()
-                .unwrap();
-            return Some(user);
+            let file = fs::read_to_string(user_config_path)?;
+            let user: User = file.parse()?;
+
+            return Ok(Some(user));
         }
-        None
+
+        Ok(None)
     }
 
     fn get_config_path() -> Option<PathBuf> {
         if let Some(config_path) = Config::get_config_path() {
             let mut user_config = PathBuf::from(config_path);
             user_config.push("user.txt");
+
             return Some(user_config);
         }
+
         None
     }
 
-    fn save_config(user: &User) -> Result<(), Error> {
+    fn save_config(user: &User) -> Result<(), Self::Error> {
         Config::create_config_path()?;
         if let Some(user_config_dir) = Self::get_config_path() {
             println!("--- Creating user config ---");
