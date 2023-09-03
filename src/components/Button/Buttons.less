@@ -3,15 +3,20 @@ button {
   border: none;
   margin: 0;
   border-radius: var(--border-rad);
+  transition: all 200ms ease-in-out;
 }
 
 .primary-btn {
-  padding: var(--btn-pads-primary);
+  padding: var(--btn-primary-pads);
   background-color: var(--btn-color-primary);
   color: white;
+  font-size: 1.6rem;
 
   svg>* {
     stroke: white;
   }
 
+  &:hover {
+    background-color: var(--btn-primary-hover);
+  }
 }
