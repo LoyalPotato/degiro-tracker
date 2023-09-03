@@ -1,0 +1,41 @@
+.dt-input {
+  --input-height: 1.5rem;
+  --input-border-color: grey;
+  border-radius: var(--border-rad);
+  border: .1rem var(--input-border-color) solid;
+  background-color: transparent;
+
+  padding: 1rem;
+  height: var(--input-height);
+
+  font-size: var(--input-height);
+  font-weight: 500;
+
+  transition: border 150ms ease-in-out;
+
+  &:focus {
+    --input-border-color: var(--main-color);
+  }
+
+  &:invalid {
+    --input-border-color: var(--negative-red);
+  }
+}
+
+.dt-input-label {
+  color: var(--offwhite);
+  font-size: 1.6rem;
+  text-align: left;
+  font-weight: 500;
+
+  &-container {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: .5rem;
+  }
+
+  &--dark {
+    color: var(--offblack);
+  }
+
+}
